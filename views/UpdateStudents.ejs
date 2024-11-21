@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update students</title>
+</head>
+<body>
+    <h1>Update students</h1>
+    <% students.forEach((student, i)=>{ %>
+        <form action="/updatestudent" method="post">
+            <input type="number" name="index" value=<%- i %> readonly>
+            <input type="number" name="roll" placeholder="Enter the Roll Number" value=<%- student.rollno %>>
+            <input type="text" name="name" placeholder="Enter the Students name" value=<%- student.name %>>
+            <input type="text" name="course" placeholder="Enter the Students course" value=<%- student.course %>>
+            <button type="submit">Update</button>
+        </form>
+        <form action="/deletestudent" method="post">
+            <input type="number" name="index" value=<%- i %> readonly>
+            <button type="submit">Delete</button>
+        </form>
+    <% }) %>
+
+</body>
+</html>

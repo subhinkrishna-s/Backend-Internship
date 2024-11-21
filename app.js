@@ -26,7 +26,15 @@ let students = [
         name: 'Pradeep',
         course: 'React'
     }
+    
 ]
+
+
+console.log('Before deletion: ',students)
+
+students.splice(0,1)
+
+console.log('after deletion: ',students)
 
 
 // Defined a GET request for '/' and rendering the 'home' EJS template with students data
@@ -37,6 +45,12 @@ app.get('/', (req, res)=>{
 // Defined a GET request for '/CreateStudents' to render the 'CreateStudents' EJS template
 app.get('/CreateStudents', (req, res)=>{
     res.render('CreateStudents')
+})
+
+
+
+app.get('/Update', (req, res)=>{
+    res.render('UpdateStudents', {students})
 })
 
 // Defined POST method for performing student enrollment - this request is triggered on student enrollment form submission
@@ -80,6 +94,32 @@ app.post('/enrollstudent', (req, res)=>{
         
         // returning a failure response by rendering the fail page
         return res.render('fail', {message: 'Trouble in user enrollment! please contact our support team or try again later'})
+    }
+})
+
+
+app.post('/updatestudent', (req, res)=>{
+    try{
+        const {index, roll, name, course} = req.body
+
+        if(index&&roll&&name&&course){
+            students[index] = {
+                rollno: roll,
+                name: name,
+                course: course
+            }
+            console.log('students: ',students)
+            return res.render('success', {message: 'student updated successfully!'})
+        }
+        else{
+            return res.render('fail', {message: 'Please provide all details!'})
+        }
+    }
+    catch(error){  // The error details are captured in the `error` parameter
+        console.log('Error in student upation: ', error) // Logging the error message in the console for debugging and resolution
+        
+        // returning a failure response by rendering the fail page
+        return res.render('fail', {message: 'Trouble in user updation! please contact our support team or try again later'})
     }
 })
 
