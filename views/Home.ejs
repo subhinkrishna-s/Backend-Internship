@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>node - Homepage</title>
+    <link rel="stylesheet" href="/css/main.css" />
 </head>
 <body>
-    <h1>EJS Homepage</h1>
+    <%- include('header') %>
+    
+    <h1 class="title">EJS Homepage</h1>
     <a href="/update">Go to uodate</a>
     
     <% students.forEach(student=>{ %>
         <p>Name: <%- student.name %> </p>
     <% }) %>
+
+    
 </body>
 </html>

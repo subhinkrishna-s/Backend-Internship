@@ -5,6 +5,7 @@ const app = Express() // Defining a variable to use the pre-defined functions fr
 
 app.use(Express.json()) // Using the JSON parsing middleware from the Express library
 app.use(Express.urlencoded({extended: true})) // Using the URL encoding middleware from the Express library for reading URL-encoded data
+app.use(Express.static('publicc'))
 
 app.set('view engine', 'ejs') // Setting the template engine to EJS
 
@@ -25,16 +26,18 @@ let students = [
         rollno: 2,
         name: 'Pradeep',
         course: 'React'
-    }
-    
+    }  
 ]
 
 
-console.log('Before deletion: ',students)
 
-students.splice(0,1)
 
-console.log('after deletion: ',students)
+// console.log('Before deletion: ',students)
+
+// students.splice(0,1)
+
+// console.log('after deletion: ',students)
+console.log('students: ',students)
 
 
 // Defined a GET request for '/' and rendering the 'home' EJS template with students data
@@ -79,6 +82,8 @@ app.post('/enrollstudent', (req, res)=>{
     
             // Adding the current student data to the main `students` array
             students.push(tempStudent)
+
+            // return res.send({success: true, students: students}) for testing on api testing tools
 
             // returning a success response by rendering the success page
             return res.render('success', {message: 'student enrolled successfully!'})
